@@ -3,7 +3,6 @@ class Api::V1::CharactersController < ApplicationController
 
   # GET /characters
   def index
-    #@characters = Character.exclude_params.paginate(page: params[:page], per_page: 10).order(updated_at: :desc)
     @characters = Character.exclude_params.paginate(page: params[:page], per_page: 10).order(Arel.sql('greatest(created_at, updated_at) desc'))
     render json: @characters
   end
