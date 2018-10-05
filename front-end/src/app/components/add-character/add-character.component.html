@@ -1,0 +1,64 @@
+<ng-template #AddCharacterModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Character</h4>
+    <button type="button" style="color: red;" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="example-container" [formGroup]="_charForm"  (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" name="name" required/>
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea rows="3" formControlName="bio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.bio.errors }" name="bio" required ></textarea>
+            <div *ngIf="submitted && f.bio.errors" class="invalid-feedback">
+                <div *ngIf="f.bio.errors.required">Bio is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="release">Release</label> 
+            <input [value]="this.data ? this.data.release : ''" placeholder="yyyy-mm-dd" type="text" formControlName="release"  placement="bottom-center" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.release.errors }"
+              name="release" required (focus)="dp.open()" ngbDatepicker #dp="ngbDatepicker"/>
+          <div *ngIf="submitted && f.release.errors" class="invalid-feedback">
+                  <div *ngIf="f.release.errors.required">Release is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }" required 
+              class="form-control" name="category">
+              <option [disabled]="true" value="" [selected]="true">{{this.data ? this.data.category.name : "Select Category" }}</option>
+              <option *ngFor="let cat of category" [value]="cat.id">
+                {{ cat.name }}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                <div *ngIf="f.category.errors.required">Category is required</div>
+            </div>
+        </div>    
+        <div class="form-group">
+           <label for="img">Upload Image</label>
+           <div *ngIf="this.data">
+              <hr>
+              <span class="span-img" >Current Image</span> 
+              <img class="img-data" [src]="this.data.img.url" />
+              <hr>
+          </div>
+            <input class="form-control-file" type="file" id="img" (change)="onFileChange($event)" #fileInput>
+            <br>
+        </div>
+        <hr>
+        <div class="text-center">
+          <button class="btn btn-sm btn-success">
+              Submit Form
+          </button>
+        </div>
+    </form>
+  </div>
+</ng-template>

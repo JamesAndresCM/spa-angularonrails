@@ -1,0 +1,6 @@
+<div>
+	<form class="form-inline my-2 my-lg-0">
+     <input class="form-control mr-sm-2" type="search" placeholder="Search Character" aria-label="Search" #searchChar (keyup.enter)="onClick(searchChar.value)" (blur)="getData()">
+     <button type="button" (click)="onClick(searchChar.value)" class="btn btn-success">Search</button>
+	</form>
+</div>

@@ -1,0 +1,56 @@
+<app-search (onblur)="getCharacters()" (clicked)="onClicked($event)"></app-search>
+<h1 class="text-center">Characters</h1>
+  <h5 class="text-center"> videogames, movies, comics</h5>
+      <div class="text-center">
+        <button (click)="onAddCharacter()" type="button" class="btn btn-sm btn-primary mt-2 mb-2">
+        Add New Character
+        </button>
+      </div>
+      <hr>
+<div class="card-columns d-block animated fadeIn fast">
+  <div class="card" *ngFor="let character of characters | paginate : { itemsPerPage: 1, currentPage:_page, id : 'server', totalItems: _total }">
+    <div class="card-header" style="background-color: ghostwhite">
+      <h6 class="card-title">{{ character.name }}
+      </h6>
+  </div>
+  <img style="padding: 5px;" class="card-img-top" [src]="character.img.url" [alt]="character.name">
+  <div class="card-body">
+    <p class="card-text text-center">{{ character.bio }}</p>
+  </div>
+  <!--
+    <ul class="list-group list-group-flush text-center">
+      <li class="list-group-item color-list">Category: {{ character.category.name }}</li>
+      <li class="list-group-item">Release: {{ character.release }}</li>
+    </ul>
+  -->
+    <div class="text-center card-footer">
+    <button (click)="onShowCharacter(character.id)" type="button" style="margin: 4px" class="btn btn-sm btn-primary mt-2 mb-2">
+      Show details
+    </button>
+    <button (click)="onDeleteCharacter(character.id)" type="button" style="margin: 4px" class="btn btn-sm btn-danger mt-2 mb-2">
+      Delete
+    </button>
+    <button (click)="onEditCharacter(character.id)" type="button" class="btn btn-sm btn-info mt-2 mb-2">
+      Edit
+    </button>
+      <app-add-character (status)='getCharacters()' #AddCharacterModal></app-add-character>
+      <app-show-character #characterModal></app-show-character>
+    </div>
+    <!--<div class="card-footer text-muted">
+      <p class="card-text"><small class="text-muted">Last updated {{ character.updated_at }} ago</small></p>
+    </div>-->
+  </div>
+</div>
+<div class="text-center mt-2">
+    <div style="background-color: ghostwhite;
+    border-radius: 10px;" *ngIf="_total > 0">
+        <pagination-controls id="server"
+          (pageChange) = "page = getCharPages($event)" 
+          directionLinks = "true"
+          autohide = "true"
+          responsive="true"
+          previousLabel="Previous"
+          nextLabel="Next">
+        </pagination-controls>
+    </div>
+</div>

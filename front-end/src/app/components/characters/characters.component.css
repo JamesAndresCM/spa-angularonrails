@@ -1,0 +1,8 @@
+.color-list{
+  background-color: deepskyblue;color: white; border-radius: 5px; margin: 5px;
+}
+.card-img-top { height: 300px; }
+
+pagination-controls /deep/ .ngx-pagination a, .ngx-pagination button {
+ text-decoration: none;
+}

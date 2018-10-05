@@ -1,0 +1,12 @@
+.img-char{
+    margin: 0 auto;
+    width: 200px;
+    padding: 5px;
+    border-radius: 200px;
+    background-color: brown;
+    height: 300px;
+    width: 300px;
+}
+.color-list{
+  background-color: deepskyblue;color: white; border-radius: 5px; margin: 5px
+}
