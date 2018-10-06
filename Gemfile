@@ -21,6 +21,8 @@ gem 'carrierwave-base64'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'will_paginate', '~> 3.1.0'
 gem 'active_model_serializers'
+gem 'file_validators'
+gem 'cocaine', '~> 0.5.8'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
