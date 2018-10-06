@@ -33,9 +33,10 @@
             <label for="category">Category</label>
             <select formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }" required 
               class="form-control" name="category">
-              <option [disabled]="true" value="" [selected]="true">{{this.data ? this.data.category.name : "Select Category" }}</option>
-              <option *ngFor="let cat of category" [value]="cat.id">
-                {{ cat.name }}
+              <option [disabled]="true" value="" [selected]="true">Select Category</option>
+              <option *ngIf="this.data" [disabled]="false" [selected]="true">{{ this.data?.category.name }}</option>
+              <option  *ngFor="let cat of filterCategory(this.data?.category.id)" [value]="cat.id">
+                {{ cat.name  }}
               </option>
             </select>
             <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
