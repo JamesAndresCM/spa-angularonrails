@@ -8,7 +8,7 @@ class Character < ApplicationRecord
   mount_base64_uploader :img, ImgUploader, file_name: -> (c) { c.name }
 
   validates :name, presence: true, uniqueness: true, length:  {in: 3..30}
-  validates :bio, presence: true, length:  {in: 3..300}
+  validates :bio, presence: true, length:  {in: 3..200}
 
   def capitalize_data
     self.name = self.name.capitalize if self.name?
