@@ -28,7 +28,7 @@ class Api::V1::CharactersController < ApplicationController
     if @character.update(character_params)
       render json: { data: @character, msg: "Character #{@character.id} has been updated", status: 200 }
     else
-      render json: @character.errors, status: :unprocessable_entity
+      render json: { msg: @character.errors, status: :unprocessable_entity }
     end
   end
 
