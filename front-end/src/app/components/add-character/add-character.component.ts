@@ -8,7 +8,7 @@ import { CharactersService } from '../../services/characters.service';
 import { CategoriesService } from '../../services/categories.service';
 import { AlertService } from '../../services/alert.service';
 
-
+//REFACTOR THIS dont forget...
 
 @Component({
   selector: 'app-add-character',
@@ -167,10 +167,13 @@ export class AddCharacterComponent implements OnInit {
 
                  this.submitted = false;
               }else{
-                 this.alertService.error("update error");
-                 this.modalRef.close();
-                 this.submitted = false;
-                 this.loading = false;
+                 for (var key in result.msg){
+                 let error_msg = key.charAt(0).toUpperCase() + key.slice(1)+": "+result.msg[key];
+                  this.alertService.error(error_msg);
+                  this.modalRef.close();
+                  this.submitted = false;
+                  this.loading = false;
+                }
               }
             },
             error =>{
