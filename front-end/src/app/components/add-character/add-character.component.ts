@@ -7,6 +7,7 @@ import { Category } from '../../models/category';
 import { CharactersService } from '../../services/characters.service';
 import { CategoriesService } from '../../services/categories.service';
 import { AlertService } from '../../services/alert.service';
+import { ValidateSize } from '../../validators/size.validator';
 
 //REFACTOR THIS dont forget...
 
@@ -60,7 +61,7 @@ export class AddCharacterComponent implements OnInit {
         this._charForm = this._formBuilder.group({
           name: [ '', [Validators.required]],
           bio: [ '', [Validators.required]],
-          img: [''],
+          img: ['',[ValidateSize]],
           release: [ '' , [Validators.required]],
           category: [''],
         });
@@ -76,7 +77,7 @@ export class AddCharacterComponent implements OnInit {
          this._charForm = this._formBuilder.group({
             name: [ this.data.name, [Validators.required]],
             bio: [ this.data.bio, [Validators.required]],
-            img: [this.data.img.url],
+            img: [this.data.img.url,[ValidateSize]],
             release: [ this.convert_date() , [Validators.required]],
             category: [this.data.category.name],
           });
@@ -234,6 +235,7 @@ export class AddCharacterComponent implements OnInit {
         this._charForm.get('img').setValue({
           filename: file.name,
           filetype: file.type,
+          filesize: file.size, 
           value: reader.result.split(',')[1]
         })
       };
