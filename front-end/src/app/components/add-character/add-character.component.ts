@@ -33,7 +33,7 @@ export class AddCharacterComponent implements OnInit {
     public _charForm: FormGroup;
     public character: any;
     public characters: any;
-    public category: Category;
+    public category: Category[] = [];
 
     resetForm(){
       this._charForm.reset({
@@ -64,12 +64,13 @@ export class AddCharacterComponent implements OnInit {
           release: [ '' , [Validators.required]],
           category: [''],
         });
-        this.getCategories();
+        
     }
 
     get f() { return this._charForm.controls; }
 
     open(data?: any){
+      this.getCategories();
       this.data = data;
       if(data){
          this._charForm = this._formBuilder.group({
@@ -247,5 +248,11 @@ export class AddCharacterComponent implements OnInit {
         );
     }
 
-    
+  filterCategory(_category){
+      if(_category){
+        return this.category.filter(x => x.id != _category);
+      }else{ 
+        return this.category; 
+     }
+   }
 }
