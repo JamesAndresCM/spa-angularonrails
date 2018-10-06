@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-10.times{
-  Category.create(name: Faker::Company.name)
-}
+Category.create(name: "Movies")
+Category.create(name: "Videogames")
+Category.create(name: "Comic")
 
 50.times{ 
   Character.create!(name: Faker::StarWars.unique.character, bio: Faker::StarWars.quote, release: Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today),category_id: Category.all.sample.id)
