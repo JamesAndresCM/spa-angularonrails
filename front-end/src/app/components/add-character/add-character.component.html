@@ -51,7 +51,10 @@
               <img class="img-data" [src]="this.data.img.url" />
               <hr>
           </div>
-            <input class="form-control-file" type="file" id="img" (change)="onFileChange($event)" #fileInput>
+            <input class="form-control-file" type="file" id="img" (change)="onFileChange($event)" #fileInput [ngClass]="{ 'is-invalid': submitted && f.img.errors }">
+            <div *ngIf="submitted && f.img.errors" class="invalid-feedback">
+                <div *ngIf="f.img.errors.validSize">Img: file size must be between 100 Bytes and 1 MB</div>
+            </div>
             <br>
         </div>
         <hr>
