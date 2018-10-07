@@ -1,24 +1,22 @@
-# README
+# SPA RAILS-ANGULAR
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Descripción 
+- Ejemplo de SPA (Single Page Application) en Angular utilizando Rails en el backend(API).
 
-Things you may want to cover:
+### Instalación
+```bash
+bundle install
+rails db:create
+rails db:migrate
+rails db:seed
+rails server
+```
 
-* Ruby version
+### Front-end 
+- [Instalación](https://github.com/JamesAndresCM/spa-angularonrails/tree/master/front-end)
+***
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Screenshots
+<img src="https://i.imgur.com/9zvRYxO.png" />
+<br>
+<img src="https://i.imgur.com/edYEBLq.png" />
