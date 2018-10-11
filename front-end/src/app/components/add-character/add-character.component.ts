@@ -1,12 +1,12 @@
 import { ViewChild, Input, Component, OnInit, Output, ElementRef, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModalRef, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder,FormControl, Validators, NgForm } from '@angular/forms';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { first } from 'rxjs/operators';
 import { Character } from '../../models/character';
 import { Category } from '../../models/category';
 import { CharactersService } from '../../services/characters.service';
 import { CategoriesService } from '../../services/categories.service';
-import { AlertService } from '../../services/alert.service';
 import { ValidateSize } from '../../validators/size.validator';
 
 //REFACTOR THIS dont forget...
@@ -52,7 +52,7 @@ export class AddCharacterComponent implements OnInit {
       public activeModal: NgbActiveModal,
       private modal: NgbModal, 
       private characterService: CharactersService, 
-      private alertService: AlertService, 
+      private alertService: FlashMessagesService, 
       private categoryService: CategoriesService, 
       private _formBuilder: FormBuilder
       ) {}
@@ -133,7 +133,7 @@ export class AddCharacterComponent implements OnInit {
         let c_type = ["image/jpeg", "image/png", "image/jpg"];
         if (this.f.img.value && c_type.includes(this.f.img.value.filetype) == false ){
             this.modalRef.close();
-            this.alertService.error("Error Content type image is not valid...");
+            this.alertService.show("Error Content type image is not valid...",{cssClass:'alert-danger', timeout: 5000});
             this.submitted = false;
             return true;
         }else{ return false; }
@@ -162,7 +162,7 @@ export class AddCharacterComponent implements OnInit {
                  this.modalRef.close();
                  this.ngOnInit();
                  this.resetForm();
-                 this.alertService.success(`Character ${this.data.name} has been updated`, true);
+                 this.alertService.show(`Character ${this.data.name} has been updated`,{cssClass:'alert-success', timeout: 5000});
 
                  this.status.emit(true);
 
@@ -170,7 +170,8 @@ export class AddCharacterComponent implements OnInit {
               }else{
                  for (var key in result.msg){
                  let error_msg = key.charAt(0).toUpperCase() + key.slice(1)+": "+result.msg[key];
-                  this.alertService.error(error_msg);
+                  this.alertService.show(error_msg,{cssClass:'alert-danger', timeout: 5000});
+
                   this.modalRef.close();
                   this.submitted = false;
                   this.loading = false;
@@ -183,7 +184,7 @@ export class AddCharacterComponent implements OnInit {
           )
         }else{
           this.modalRef.close();
-          this.alertService.error("Error Content type image is not valid...");
+          this.alertService.show("Error Content type image is not valid...",{cssClass:'alert-danger', timeout: 5000});
           this.submitted = false;
         }
 
@@ -197,7 +198,8 @@ export class AddCharacterComponent implements OnInit {
               if(result.status == 422){
                  for (var key in result.msg){
                  let error_msg = key.charAt(0).toUpperCase() + key.slice(1)+": "+result.msg[key];
-                  this.alertService.error(error_msg);
+                  this.alertService.show(error_msg,{cssClass:'alert-danger', timeout: 5000});
+
                   this.modalRef.close();
                   this.submitted = false;
                   this.loading = false;
@@ -207,7 +209,7 @@ export class AddCharacterComponent implements OnInit {
                  
                  this.status.emit(true);
 
-                 this.alertService.success(result.msg, true);
+                 this.alertService.show(result.msg,{cssClass:'alert-success', timeout: 5000});
                  this.resetForm();
                  this.submitted = false;
               }
