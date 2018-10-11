@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 
 // routes
@@ -18,7 +19,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { CharactersComponent } from './components/characters/characters.component';
 import { ShowCharacterComponent } from './components/show-character/show-character.component';
-import { AlertComponent } from './components/alert/alert.component';
 import { AddCharacterComponent } from './components/add-character/add-character.component';
 import { SearchComponent } from './components/search/search.component';
 
@@ -26,7 +26,8 @@ import { SearchComponent } from './components/search/search.component';
 // services
 import { CharactersService } from './services/characters.service';
 import { CategoriesService } from './services/categories.service';
-import { AlertService } from './services/alert.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +37,6 @@ import { AlertService } from './services/alert.service';
     AboutComponent,
     CharactersComponent,
     ShowCharacterComponent,
-    AlertComponent,
     AddCharacterComponent,
     SearchComponent
   ],
@@ -47,10 +47,11 @@ import { AlertService } from './services/alert.service';
     APP_ROUTING,
     NgbModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FlashMessagesModule
   ],
   providers: [
-    CharactersService, AlertService, NgbActiveModal, CategoriesService
+    CharactersService, FlashMessagesService, NgbActiveModal, CategoriesService
   ],
   bootstrap: [AppComponent]
 })
