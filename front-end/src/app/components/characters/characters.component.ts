@@ -1,7 +1,7 @@
 import { ViewChild,Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { CharactersService } from '../../services/characters.service'
-import { AlertService } from '../../services/alert.service'
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { Character } from '../../models/character';
 import { ShowCharacterComponent } from '../show-character/show-character.component';
 import { AddCharacterComponent } from '../add-character/add-character.component';
@@ -24,7 +24,7 @@ export class CharactersComponent implements OnInit {
 
   constructor(
     private characterService: CharactersService,
-    private alertService: AlertService
+    private alertService: FlashMessagesService
   ) { }
 
 
@@ -71,7 +71,7 @@ export class CharactersComponent implements OnInit {
     this.characterService.delChar(id).subscribe(
       result => {
         if(result.status == 200){
-          this.alertService.error(result.msg);
+          this.alertService.show(result.msg,{cssClass:'alert-danger', timeout: 5000});
           this.getCharacters();
           }
         },
@@ -88,7 +88,7 @@ export class CharactersComponent implements OnInit {
     this.characterService.searchCharacter(char).subscribe(
         result => {
           if (result.status == 201){
-              this.alertService.error(result.msg);
+              this.alertService.show(result.msg,{cssClass:'alert-danger', timeout: 5000});
           }else{
             this.characters = result.msg;
           }
