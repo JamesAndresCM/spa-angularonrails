@@ -1,9 +1,0 @@
-<div style="text-align:center; margin: 0 auto;" 
-  class="c_alert" *ngIf="message" 
-  [ngClass]="{ 'alert': message, 'alert-dismissible fade show alert-success': message.type === 'success', 'alert-danger alert-dismissible fade show': message.type === 'error' }">
-  {{message.text}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<br>
